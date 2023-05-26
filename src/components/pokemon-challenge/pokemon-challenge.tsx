@@ -3,22 +3,25 @@ import { getRandomPokemon } from "~/services/pokemonsService";
 import Pokemon from "../pokemon/pokemon";
 
 export default component$(() => {
-    const time:number = 5;
 
     const store = useStore({
         pokemonName: '',
         inputPokemon: '',
-        hidePokemon: true
+        hidePokemon: true,
+        getNewPokemon: false,
+        points: 0,
     });
 
-    const pokemonsResource = useResource$(({ track, cleanup }) => {
-        const controller = new AbortController();
-        cleanup(() => controller.abort());
-        return getRandomPokemon();
+    const pokemonsResource = useResource$(async ({ track, cleanup }) => {
+        track(()=>store.getNewPokemon)
+        const pokemon = await getRandomPokemon();
+        store.hidePokemon = true;
+        return pokemon;
     });
 
     return (
-        <>
+        <div class="container">
+            <div>Puntaje: {store.points}</div>
             <div class="challenge-cont">
                 <Resource
                     value={pokemonsResource}
@@ -36,15 +39,22 @@ export default component$(() => {
                         onInput$={(ev) => (store.inputPokemon = (ev.target as HTMLInputElement).value)}
                     />
                     <button onClick$={()=>{
-                        console.log(store.pokemonName);
                         if(store.inputPokemon==store.pokemonName){
                             alert("It's "+ store.pokemonName);
                             store.hidePokemon = false;
+                            store.points ++;
+                            setTimeout(()=>{
+                                store.getNewPokemon = !store.getNewPokemon;
+                                store.inputPokemon = '';
+                            },3000) 
                         }else{
                             alert("It's "+ store.inputPokemon + "? I dont think so");
                         }
                     }}>Send</button>
+                    <button onClick$={()=>{
+                       store.getNewPokemon = !store.getNewPokemon;
+                    }}>new pokemon</button>
             </div>
-        </>
+        </div>
     )
 })

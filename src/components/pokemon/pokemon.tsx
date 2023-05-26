@@ -20,9 +20,13 @@ interface PokemonProps{
     hidePokemon: boolean
 }
 export default component$((props: PokemonProps)=>{
+    let style = "filter: brightness(0);width:200px;";
+    if(props.hidePokemon == false){
+        style="width:200px;";
+    }
     return(
         <div style="padding:120px;">
-            <img width="200px" src={props.pokemonInfo.sprites.front_default} alt="" style="filter: brightness(0);"/>
+            <img src={props.pokemonInfo.sprites.front_default} alt="" style={style}/>
         </div>
     )
 })

@@ -27,10 +27,13 @@ body {
   padding: 0;
   line-height: inherit;
 }
-
-.challenge-cont{
+.container{
   max-width: 800px;
   margin: auto;
+}
+.challenge-cont{
+  max-width: 800px;
+  margin: 20px auto;
   background-color: black;
   aspect-ratio: 16/9;
   background-image: url('/bg.webp');
