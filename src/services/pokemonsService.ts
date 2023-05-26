@@ -10,7 +10,6 @@ export async function getRandomPokemon() {
     var randomNumber = Math.floor(Math.random() * (maxPokedex+1)); // Multiplicado por 151 porque el rango es exclusivo en el límite superior
     const randPokemon = allPokemons[randomNumber];
     const pokemonInfo = await getPokemonInfo(randPokemon.url);
-    console.log(pokemonInfo);
     return {randPokemon,pokemonInfo};
 }
 
