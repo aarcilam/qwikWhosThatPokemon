@@ -27,3 +27,11 @@ body {
   padding: 0;
   line-height: inherit;
 }
+
+.challenge-cont{
+  background-color: black;
+  aspect-ratio: 16/9;
+  background-image: url('/bg.webp');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
