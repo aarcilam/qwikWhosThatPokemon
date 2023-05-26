@@ -1,5 +1,6 @@
 import { Resource, component$, useResource$ } from "@builder.io/qwik";
 import { getRandomPokemon } from "~/services/pokemonsService";
+import Pokemon from "../pokemon/pokemon";
 
 export default component$(() => {
 
@@ -14,7 +15,7 @@ export default component$(() => {
             <Resource
                 value={pokemonsResource}
                 onPending={() => <p>Loading...</p>}
-                onResolved={(data) => <h2>{data.randPokemon.name}</h2>}
+                onResolved={(data) => <> <Pokemon randPokemon={data.randPokemon} pokemonInfo={data.pokemonInfo}></Pokemon> </>}
             />
         </div>
     )
