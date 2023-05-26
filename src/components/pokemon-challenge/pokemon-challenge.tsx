@@ -14,7 +14,7 @@ export default component$(() => {
             <Resource
                 value={pokemonsResource}
                 onPending={() => <p>Loading...</p>}
-                onResolved={(data) => <h2>{data.name}</h2>}
+                onResolved={(data) => <h2>{data.randPokemon.name}</h2>}
             />
         </div>
     )
